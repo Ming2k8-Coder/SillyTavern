@@ -1770,7 +1770,7 @@ export async function deleteGroupChat(groupId, chatId) {
 export async function importGroupChat(formData) {
     await jQuery.ajax({
         type: 'POST',
-        url: '/api/chats/group/import',
+        url: './api/chats/group/import',
         data: formData,
         beforeSend: function () {
         },

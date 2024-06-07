@@ -185,7 +185,7 @@ class WebScraper {
         const files = [];
 
         for (const link of links) {
-            const result = await fetch('/api/serpapi/visit', {
+            const result = await fetch('./api/serpapi/visit', {
                 method: 'POST',
                 headers: getRequestHeaders(),
                 body: JSON.stringify({ url: link }),
@@ -252,7 +252,7 @@ class MediaWikiScraper {
 
     async isAvailable() {
         try {
-            const result = await fetch('/api/plugins/fandom/probe-mediawiki', {
+            const result = await fetch('./api/plugins/fandom/probe-mediawiki', {
                 method: 'POST',
                 headers: getRequestHeaders(),
             });
@@ -293,7 +293,7 @@ class MediaWikiScraper {
 
         const toast = toastr.info('Working, please wait...');
 
-        const result = await fetch('/api/plugins/fandom/scrape-mediawiki', {
+        const result = await fetch('./api/plugins/fandom/scrape-mediawiki', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ url, filter }),
@@ -345,7 +345,7 @@ class FandomScraper {
      */
     async isAvailable() {
         try {
-            const result = await fetch('/api/plugins/fandom/probe', {
+            const result = await fetch('./api/plugins/fandom/probe', {
                 method: 'POST',
                 headers: getRequestHeaders(),
             });
@@ -400,7 +400,7 @@ class FandomScraper {
 
         const toast = toastr.info('Working, please wait...');
 
-        const result = await fetch('/api/plugins/fandom/scrape', {
+        const result = await fetch('./api/plugins/fandom/scrape', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ fandom, filter }),
@@ -530,7 +530,7 @@ class YouTubeScraper {
     async getScript(videoUrl, lang) {
         const id = this.parseId(String(videoUrl).trim());
 
-        const result = await fetch('/api/serpapi/transcript', {
+        const result = await fetch('./api/serpapi/transcript', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ id, lang }),

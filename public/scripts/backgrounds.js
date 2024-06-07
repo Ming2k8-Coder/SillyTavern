@@ -428,7 +428,7 @@ function onBackgroundUploadSelected() {
 function uploadBackground(formData) {
     jQuery.ajax({
         type: 'POST',
-        url: '/api/backgrounds/upload',
+        url: './api/backgrounds/upload',
         data: formData,
         beforeSend: function () {
         },

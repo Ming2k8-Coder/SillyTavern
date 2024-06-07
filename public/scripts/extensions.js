@@ -652,7 +652,7 @@ async function showExtensionsDetails() {
 
 /**
  * Handles the click event for the update button of an extension.
- * This function makes a POST request to '/update_extension' with the extension's name.
+ * This function makes a POST request to './update_extension' with the extension's name.
  * If the extension is already up to date, it displays a success message.
  * If the extension is not up to date, it updates the extension and displays a success message with the new commit hash.
  */
@@ -695,7 +695,7 @@ async function updateExtension(extensionName, quiet) {
 
 /**
  * Handles the click event for the delete button of an extension.
- * This function makes a POST request to '/api/extensions/delete' with the extension's name.
+ * This function makes a POST request to './api/extensions/delete' with the extension's name.
  * If the extension is deleted, it displays a success message.
  * Creates a popup for the user to confirm before delete.
  */
@@ -950,7 +950,7 @@ export async function writeExtensionField(characterId, key, value) {
             },
         },
     };
-    const mergeResponse = await fetch('/api/characters/merge-attributes', {
+    const mergeResponse = await fetch('./api/characters/merge-attributes', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify(saveDataRequest),
@@ -977,7 +977,7 @@ jQuery(function () {
     /**
      * Handles the click event for the third-party extension import button.
      * Prompts the user to enter the Git URL of the extension to import.
-     * After obtaining the Git URL, makes a POST request to '/api/extensions/install' to import the extension.
+     * After obtaining the Git URL, makes a POST request to './api/extensions/install' to import the extension.
      * If the extension is imported successfully, a success message is displayed.
      * If the extension import fails, an error message is displayed and the error is logged to the console.
      * After successfully importing the extension, the extension settings are reloaded and a 'EXTENSION_SETTINGS_LOADED' event is emitted.

@@ -416,7 +416,7 @@ async function downloadOllamaModel() {
 
         toastr.info('Download may take a while, please wait...', 'Working on it');
 
-        const response = await fetch('/api/backends/text-completions/ollama/download', {
+        const response = await fetch('./api/backends/text-completions/ollama/download', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({

@@ -82,14 +82,14 @@ const TOKENIZER_URLS = {
         count: './api/tokenizers/yi/encode',
     },
     [tokenizers.CLAUDE]: {
-        encode: '/api/tokenizers/claude/encode',
-        decode: '/api/tokenizers/claude/decode',
-        count: '/api/tokenizers/claude/encode',
+        encode: './api/tokenizers/claude/encode',
+        decode: './api/tokenizers/claude/decode',
+        count: './api/tokenizers/claude/encode',
     },
     [tokenizers.LLAMA3]: {
-        encode: '/api/tokenizers/llama3/encode',
-        decode: '/api/tokenizers/llama3/decode',
-        count: '/api/tokenizers/llama3/encode',
+        encode: './api/tokenizers/llama3/encode',
+        decode: './api/tokenizers/llama3/decode',
+        count: './api/tokenizers/llama3/encode',
     },
     [tokenizers.API_TEXTGENERATIONWEBUI]: {
         encode: './api/tokenizers/remote/textgenerationwebui/encode',
@@ -558,7 +558,7 @@ export function countTokensOpenAI(messages, full = false) {
     const shouldTokenizeGoogle = oai_settings.chat_completion_source === chat_completion_sources.MAKERSUITE && oai_settings.use_google_tokenizer;
     let tokenizerEndpoint = '';
     if (shouldTokenizeAI21) {
-        tokenizerEndpoint = '/api/tokenizers/ai21/count';
+        tokenizerEndpoint = './api/tokenizers/ai21/count';
     } else if (shouldTokenizeGoogle) {
         tokenizerEndpoint = `/api/tokenizers/google/count?model=${getTokenizerModel()}&reverse_proxy=${oai_settings.reverse_proxy}&proxy_password=${oai_settings.proxy_password}`;
     } else {
@@ -619,7 +619,7 @@ export async function countTokensOpenAIAsync(messages, full = false) {
     const shouldTokenizeGoogle = oai_settings.chat_completion_source === chat_completion_sources.MAKERSUITE && oai_settings.use_google_tokenizer;
     let tokenizerEndpoint = '';
     if (shouldTokenizeAI21) {
-        tokenizerEndpoint = '/api/tokenizers/ai21/count';
+        tokenizerEndpoint = './api/tokenizers/ai21/count';
     } else if (shouldTokenizeGoogle) {
         tokenizerEndpoint = `/api/tokenizers/google/count?model=${getTokenizerModel()}`;
     } else {

@@ -1085,7 +1085,7 @@ export async function saveBase64AsFile(base64Data, characterName, filename = '',
     };
 
     // Send the data URL to your backend using fetch
-    const response = await fetch('/api/images/upload', {
+    const response = await fetch('./api/images/upload', {
         method: 'POST',
         body: JSON.stringify(requestBody),
         headers: {
@@ -1443,7 +1443,7 @@ export async function extractTextFromEpub(blob) {
 export async function extractTextFromOffice(blob) {
     async function checkPluginAvailability() {
         try {
-            const result = await fetch('/api/plugins/office/probe', {
+            const result = await fetch('./api/plugins/office/probe', {
                 method: 'POST',
                 headers: getRequestHeaders(),
             });
@@ -1462,7 +1462,7 @@ export async function extractTextFromOffice(blob) {
 
     const base64 = await getBase64Async(blob);
 
-    const response = await fetch('/api/plugins/office/parse', {
+    const response = await fetch('./api/plugins/office/parse', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({ data: base64 }),

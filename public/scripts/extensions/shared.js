@@ -88,15 +88,15 @@ export async function getMultimodalCaption(base64Img, prompt) {
     function getEndpointUrl() {
         switch (extension_settings.caption.multimodal_api) {
             case 'google':
-                return '/api/google/caption-image';
+                return './api/google/caption-image';
             case 'anthropic':
-                return '/api/anthropic/caption-image';
+                return './api/anthropic/caption-image';
             case 'llamacpp':
-                return '/api/backends/text-completions/llamacpp/caption-image';
+                return './api/backends/text-completions/llamacpp/caption-image';
             case 'ollama':
-                return '/api/backends/text-completions/ollama/caption-image';
+                return './api/backends/text-completions/ollama/caption-image';
             default:
-                return '/api/openai/caption-image';
+                return './api/openai/caption-image';
         }
     }
 

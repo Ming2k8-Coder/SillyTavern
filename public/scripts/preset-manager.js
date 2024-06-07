@@ -177,7 +177,7 @@ class PresetManager {
     async savePreset(name, settings) {
         const preset = settings ?? this.getPresetSettings(name);
 
-        const res = await fetch('/api/presets/save', {
+        const res = await fetch('./api/presets/save', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ preset, name, apiId: this.apiId }),
@@ -368,7 +368,7 @@ class PresetManager {
             $(this.select).trigger('change');
         }
 
-        const response = await fetch('/api/presets/delete', {
+        const response = await fetch('./api/presets/delete', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ name: nameToDelete, apiId: this.apiId }),
@@ -378,7 +378,7 @@ class PresetManager {
     }
 
     async getDefaultPreset(name) {
-        const response = await fetch('/api/presets/restore', {
+        const response = await fetch('./api/presets/restore', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ name, apiId: this.apiId }),

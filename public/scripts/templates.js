@@ -68,7 +68,7 @@ export async function renderTemplateAsync(templateId, templateData = {}, sanitiz
     }
 
     try {
-        const pathToTemplate = fullPath ? templateId : `/scripts/templates/${templateId}.html`;
+        const pathToTemplate = fullPath ? templateId : `./scripts/templates/${templateId}.html`;
         const template = await fetchTemplateAsync(pathToTemplate);
         let result = template(templateData);
 
@@ -110,7 +110,7 @@ export function renderTemplate(templateId, templateData = {}, sanitize = true, l
     }
 
     try {
-        const pathToTemplate = fullPath ? templateId : `/scripts/templates/${templateId}.html`;
+        const pathToTemplate = fullPath ? templateId : `./scripts/templates/${templateId}.html`;
         const template = fetchTemplateSync(pathToTemplate);
         let result = template(templateData);
 

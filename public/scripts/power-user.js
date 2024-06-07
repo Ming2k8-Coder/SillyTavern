@@ -2197,7 +2197,7 @@ async function deleteTheme() {
         return;
     }
 
-    const response = await fetch('/api/themes/delete', {
+    const response = await fetch('./api/themes/delete', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({ name: themeName }),
@@ -2323,7 +2323,7 @@ async function saveTheme(name = undefined) {
         compact_input_area: power_user.compact_input_area,
     };
 
-    const response = await fetch('/api/themes/save', {
+    const response = await fetch('./api/themes/save', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify(theme),
@@ -2365,7 +2365,7 @@ async function saveMovingUI() {
     };
     console.log(movingUIPreset);
 
-    const response = await fetch('/api/moving-ui/save', {
+    const response = await fetch('./api/moving-ui/save', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify(movingUIPreset),

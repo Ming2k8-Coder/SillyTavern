@@ -158,7 +158,7 @@ function getUserAvatarBlock(name) {
  * @returns {Promise<string[]>} List of avatar file names
  */
 export async function getUserAvatars(doRender = true, openPageAt = '') {
-    const response = await fetch('/api/avatars/get', {
+    const response = await fetch('./api/avatars/get', {
         method: 'POST',
         headers: getRequestHeaders(),
     });
@@ -246,7 +246,7 @@ async function uploadUserAvatar(url, name) {
 
     return jQuery.ajax({
         type: 'POST',
-        url: '/api/avatars/upload',
+        url: './api/avatars/upload',
         data: formData,
         beforeSend: () => { },
         cache: false,
@@ -275,7 +275,7 @@ async function changeUserAvatar(e) {
 
     const formData = new FormData(form);
     const dataUrl = await getBase64Async(file);
-    let url = '/api/avatars/upload';
+    let url = './api/avatars/upload';
 
     if (!power_user.never_resize_avatars) {
         const confirmation = await callPopup(getCropPopup(dataUrl), 'avatarToCrop', '', { okButton: 'Crop', large: true, wide: true });
@@ -646,7 +646,7 @@ async function deleteUserAvatar(e) {
         return;
     }
 
-    const request = await fetch('/api/avatars/delete', {
+    const request = await fetch('./api/avatars/delete', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({

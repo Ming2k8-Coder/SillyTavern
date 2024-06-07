@@ -4,7 +4,7 @@ import { updateSecretDisplay } from './secrets.js';
 const storageKey = 'language';
 const overrideLanguage = localStorage.getItem(storageKey);
 const localeFile = String(overrideLanguage || navigator.language || navigator.userLanguage || 'en').toLowerCase();
-const langs = await fetch('/locales/lang.json').then(response => response.json());
+const langs = await fetch('./locales/lang.json').then(response => response.json());
 // Don't change to let/const! It will break module loading.
 // eslint-disable-next-line prefer-const
 var localeData = await getLocaleData(localeFile);

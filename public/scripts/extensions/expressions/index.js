@@ -410,7 +410,7 @@ function onExpressionsShowDefaultInput() {
 
     const existingImageSrc = $('img.expression').prop('src');
     if (existingImageSrc !== undefined) {                      //if we have an image in src
-        if (!value && existingImageSrc.includes('/img/default-expressions/')) {    //and that image is from /img/ (default)
+        if (!value && existingImageSrc.includes('./img/default-expressions/')) {    //and that image is from /img/ (default)
             $('img.expression').prop('src', '');               //remove it
             lastMessage = null;
         }
@@ -883,7 +883,7 @@ function getFolderNameByMessage(message) {
 }
 
 async function sendExpressionCall(name, expression, force, vnMode) {
-    lastExpression[name.split('/')[0]] = expression;
+    lastExpression[name.split('./')[0]] = expression;
     if (!vnMode) {
         vnMode = isVisualNovelMode();
     }
@@ -901,7 +901,7 @@ async function setSpriteSetCommand(_, folder) {
         folder = '';
     }
 
-    if (folder.startsWith('/') || folder.startsWith('\\')) {
+    if (folder.startsWith('./') || folder.startsWith('\\')) {
         folder = folder.slice(1);
 
         const currentLastMessage = getLastCharacterMessage();
@@ -1249,7 +1249,7 @@ async function drawSpritesList(character, labels, sprites) {
             $('#image_list').append(listItem);
         }
         else {
-            const listItem = await getListItem(item, '/img/No-Image-Placeholder.svg', 'failure', isCustom);
+            const listItem = await getListItem(item, './img/No-Image-Placeholder.svg', 'failure', isCustom);
             $('#image_list').append(listItem);
         }
     }

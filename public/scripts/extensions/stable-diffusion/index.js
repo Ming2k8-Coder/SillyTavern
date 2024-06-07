@@ -1057,7 +1057,7 @@ async function validateDrawthingsUrl() {
             throw new Error('URL is not set.');
         }
 
-        const result = await fetch('/api/sd/drawthings/ping', {
+        const result = await fetch('./api/sd/drawthings/ping', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify(getSdRequestBody()),
@@ -1163,7 +1163,7 @@ async function getAutoRemoteModel() {
 
 async function getDrawthingsRemoteModel() {
     try {
-        const result = await fetch('/api/sd/drawthings/get-model', {
+        const result = await fetch('./api/sd/drawthings/get-model', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify(getSdRequestBody()),
@@ -1624,7 +1624,7 @@ async function loadExtrasModels() {
     }
 
     const url = new URL(getApiUrl());
-    url.pathname = '/api/image/model';
+    url.pathname = './api/image/model';
     const getCurrentModelResult = await doExtrasFetch(url);
 
     if (getCurrentModelResult.ok) {
@@ -1632,7 +1632,7 @@ async function loadExtrasModels() {
         extension_settings.sd.model = data.model;
     }
 
-    url.pathname = '/api/image/models';
+    url.pathname = './api/image/models';
     const getModelsResult = await doExtrasFetch(url);
 
     if (getModelsResult.ok) {
@@ -1977,7 +1977,7 @@ async function loadComfyWorkflows() {
 
     try {
         $('#sd_comfy_workflow').empty();
-        const result = await fetch('/api/sd/comfy/workflows', {
+        const result = await fetch('./api/sd/comfy/workflows', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({
@@ -2410,7 +2410,7 @@ async function sendGenerationRequest(generationType, prompt, additionalNegativeP
 }
 
 async function generateTogetherAIImage(prompt, negativePrompt) {
-    const result = await fetch('/api/sd/together/generate', {
+    const result = await fetch('./api/sd/together/generate', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2434,7 +2434,7 @@ async function generateTogetherAIImage(prompt, negativePrompt) {
 }
 
 async function generatePollinationsImage(prompt, negativePrompt) {
-    const result = await fetch('/api/sd/pollinations/generate', {
+    const result = await fetch('./api/sd/pollinations/generate', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2467,7 +2467,7 @@ async function generatePollinationsImage(prompt, negativePrompt) {
  */
 async function generateExtrasImage(prompt, negativePrompt) {
     const url = new URL(getApiUrl());
-    url.pathname = '/api/image';
+    url.pathname = './api/image';
     const result = await doExtrasFetch(url, {
         method: 'POST',
         headers: {
@@ -2509,7 +2509,7 @@ async function generateExtrasImage(prompt, negativePrompt) {
  * @returns {Promise<{format: string, data: string}>} - A promise that resolves when the image generation and processing are complete.
  */
 async function generateHordeImage(prompt, negativePrompt) {
-    const result = await fetch('/api/horde/generate-image', {
+    const result = await fetch('./api/horde/generate-image', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2547,7 +2547,7 @@ async function generateHordeImage(prompt, negativePrompt) {
  * @returns {Promise<{format: string, data: string}>} - A promise that resolves when the image generation and processing are complete.
  */
 async function generateAutoImage(prompt, negativePrompt) {
-    const result = await fetch('/api/sd/generate', {
+    const result = await fetch('./api/sd/generate', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2599,7 +2599,7 @@ async function generateAutoImage(prompt, negativePrompt) {
  * @returns {Promise<{format: string, data: string}>} - A promise that resolves when the image generation and processing are complete.
  */
 async function generateDrawthingsImage(prompt, negativePrompt) {
-    const result = await fetch('/api/sd/drawthings/generate', {
+    const result = await fetch('./api/sd/drawthings/generate', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2640,7 +2640,7 @@ async function generateDrawthingsImage(prompt, negativePrompt) {
 async function generateNovelImage(prompt, negativePrompt) {
     const { steps, width, height, sm, sm_dyn } = getNovelParams();
 
-    const result = await fetch('/api/novelai/generate-image', {
+    const result = await fetch('./api/novelai/generate-image', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2763,7 +2763,7 @@ async function generateOpenAiImage(prompt) {
         height = 512;
     }
 
-    const result = await fetch('/api/openai/generate-image', {
+    const result = await fetch('./api/openai/generate-image', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2806,7 +2806,7 @@ async function generateComfyImage(prompt, negativePrompt) {
         'clip_skip',
     ];
 
-    const workflowResponse = await fetch('/api/sd/comfy/workflow', {
+    const workflowResponse = await fetch('./api/sd/comfy/workflow', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2851,7 +2851,7 @@ async function generateComfyImage(prompt, negativePrompt) {
     console.log(`{
         "prompt": ${workflow}
     }`);
-    const promptResult = await fetch('/api/sd/comfy/generate', {
+    const promptResult = await fetch('./api/sd/comfy/generate', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2869,7 +2869,7 @@ async function generateComfyImage(prompt, negativePrompt) {
 }
 
 async function onComfyOpenWorkflowEditorClick() {
-    let workflow = await (await fetch('/api/sd/comfy/workflow', {
+    let workflow = await (await fetch('./api/sd/comfy/workflow', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2941,7 +2941,7 @@ async function onComfyOpenWorkflowEditorClick() {
     checkPlaceholders();
     $('#sd_comfy_workflow_editor_workflow').on('input', checkPlaceholders);
     if (await popupResult) {
-        const response = await fetch('/api/sd/comfy/save-workflow', {
+        const response = await fetch('./api/sd/comfy/save-workflow', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({
@@ -2965,7 +2965,7 @@ async function onComfyNewWorkflowClick() {
         name += '.json';
     }
     extension_settings.sd.comfy_workflow = name;
-    const response = await fetch('/api/sd/comfy/save-workflow', {
+    const response = await fetch('./api/sd/comfy/save-workflow', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({
@@ -2988,7 +2988,7 @@ async function onComfyDeleteWorkflowClick() {
     if (!confirm) {
         return;
     }
-    const response = await fetch('/api/sd/comfy/delete-workflow', {
+    const response = await fetch('./api/sd/comfy/delete-workflow', {
         method: 'POST',
         headers: getRequestHeaders(),
         body: JSON.stringify({

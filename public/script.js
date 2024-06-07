@@ -1954,7 +1954,7 @@ function insertSVGIcon(mes, extra) {
     const image = new Image();
     // Add classes for styling and identification
     image.classList.add('icon-svg', 'timestamp-icon');
-    image.src = `/img/${modelName}.svg`;
+    image.src = `./img/${modelName}.svg`;
     image.title = `${extra?.api ? extra.api + ' - ' : ''}${extra?.model ?? ''}`;
 
     image.onload = async function () {
@@ -2450,7 +2450,7 @@ export async function generateQuietPrompt(quiet_prompt, quietToLoud, skipWIAN, q
  * @returns {Promise<boolean>} Whether the message sending was interrupted
  */
 export async function processCommands(message) {
-    if (!message || !message.trim().startsWith('/')) {
+    if (!message || !message.trim().startsWith('./')) {
         return false;
     }
     await executeSlashCommandsOnChatInput(message, {
@@ -4271,7 +4271,7 @@ export async function Generate(type, { automatic_trigger, force_name2, quiet_pro
             }
         }
 
-        console.debug('/api/chats/save called by /Generate');
+        console.debug('./api/chats/save called by /Generate');
         await saveChatConditional();
         unblockGeneration(type);
         streamingProcessor = null;
@@ -4909,13 +4909,13 @@ async function sendStreamingRequest(type, data) {
 function getGenerateUrl(api) {
     switch (api) {
         case 'kobold':
-            return '/api/backends/kobold/generate';
+            return './api/backends/kobold/generate';
         case 'koboldhorde':
-            return '/api/backends/koboldhorde/generate';
+            return './api/backends/koboldhorde/generate';
         case 'textgenerationwebui':
-            return '/api/backends/text-completions/generate';
+            return './api/backends/text-completions/generate';
         case 'novel':
-            return '/api/novelai/generate';
+            return './api/novelai/generate';
         default:
             throw new Error(`Unknown API: ${api}`);
     }
@@ -5450,21 +5450,13 @@ export async function renameCharacter(name = null, { silent = false, renameChats
     const oldAvatar = characters[this_chid].avatar;
     const newValue = name || await callPopup('<h3>New name:</h3>', 'input', characters[this_chid].name);
 
-    if (!newValue) {
-        toastr.warning('No character name provided.', 'Rename Character');
-        return false;
-    }
-    if (newValue === characters[this_chid].name) {
-        toastr.info('Same character name provided, so name did not change.', 'Rename Character');
-        return false;
-    }
-
-    const body = JSON.stringify({ avatar_url: oldAvatar, new_name: newValue });
-    const response = await fetch('./api/characters/rename', {
-        method: 'POST',
-        headers: getRequestHeaders(),
-        body,
-    });
+    if (newValue && newValue !== characters[this_chid].name) {
+        const body = JSON.stringify({ avatar_url: oldAvatar, new_name: newValue });
+        const response = await fetch('./api/characters/rename', {
+            method: 'POST',
+            headers: getRequestHeaders(),
+            body,
+        });
 
     try {
         if (response.ok) {
@@ -5786,7 +5778,7 @@ export function buildAvatarList(block, entities, { templateId = 'inline_avatar_t
 }
 
 export async function getChat() {
-    //console.log('/api/chats/get -- entered for -- ' + characters[this_chid].name);
+    //console.log('./api/chats/get -- entered for -- ' + characters[this_chid].name);
     try {
         const response = await $.ajax({
             type: 'POST',
@@ -8466,7 +8458,7 @@ export async function renameChat(oldFileName, newName) {
 
     try {
         showLoader();
-        const response = await fetch('/api/chats/rename', {
+        const response = await fetch('./api/chats/rename', {
             method: 'POST',
             body: JSON.stringify(body),
             headers: getRequestHeaders(),
@@ -9057,7 +9049,7 @@ jQuery(async function () {
                 await delChat(chat_file_for_del);
             }
 
-            if (fromSlashCommand) {  // When called from `/delchat` command, don't re-open the history view.
+            if (fromSlashCommand) {  // When called from `./delchat` command, don't re-open the history view.
                 $('#options').hide();  // hide option popup menu
                 hideLoader();
             } else {  // Open the history view again after 2 seconds (delay to avoid edge cases for deleting last chat).
@@ -10329,7 +10321,7 @@ jQuery(async function () {
     $(document).on('click', '.mes .avatar', function () {
         const messageElement = $(this).closest('.mes');
         const thumbURL = $(this).children('img').attr('src');
-        const charsPath = '/characters/';
+        const charsPath = './characters/';
         const targetAvatarImg = thumbURL.substring(thumbURL.lastIndexOf('=') + 1);
         const charname = targetAvatarImg.replace('.png', '');
         const isValidCharacter = characters.some(x => x.avatar === decodeURIComponent(targetAvatarImg));
@@ -10591,21 +10583,21 @@ jQuery(async function () {
         for (const url of inputs) {
             let request;
 
-            if (isValidUrl(url)) {
-                console.debug('Custom content import started for URL: ', url);
-                request = await fetch('./api/content/importURL', {
-                    method: 'POST',
-                    headers: getRequestHeaders(),
-                    body: JSON.stringify({ url }),
-                });
-            } else {
-                console.debug('Custom content import started for Char UUID: ', url);
-                request = await fetch('./api/content/importUUID', {
-                    method: 'POST',
-                    headers: getRequestHeaders(),
-                    body: JSON.stringify({ url }),
-                });
-            }
+        if (isValidUrl(url)) {
+            console.debug('Custom content import started for URL: ', url);
+            request = await fetch('./api/content/importURL', {
+                method: 'POST',
+                headers: getRequestHeaders(),
+                body: JSON.stringify({ url }),
+            });
+        } else {
+            console.debug('Custom content import started for Char UUID: ', url);
+            request = await fetch('./api/content/importUUID', {
+                method: 'POST',
+                headers: getRequestHeaders(),
+                body: JSON.stringify({ url }),
+            });
+        }
 
             if (!request.ok) {
                 toastr.info(request.statusText, 'Custom content import failed');

@@ -45,7 +45,7 @@ function isAdmin() {
  */
 async function getCurrentUser() {
     try {
-        const response = await fetch('/api/users/me', {
+        const response = await fetch('./api/users/me', {
             headers: getRequestHeaders(),
         });
 
@@ -66,7 +66,7 @@ async function getCurrentUser() {
  */
 async function getUsers() {
     try {
-        const response = await fetch('/api/users/get', {
+        const response = await fetch('./api/users/get', {
             method: 'POST',
             headers: getRequestHeaders(),
         });
@@ -89,7 +89,7 @@ async function getUsers() {
  */
 async function enableUser(handle, callback) {
     try {
-        const response = await fetch('/api/users/enable', {
+        const response = await fetch('./api/users/enable', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle }),
@@ -109,7 +109,7 @@ async function enableUser(handle, callback) {
 
 async function disableUser(handle, callback) {
     try {
-        const response = await fetch('/api/users/disable', {
+        const response = await fetch('./api/users/disable', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle }),
@@ -135,7 +135,7 @@ async function disableUser(handle, callback) {
  */
 async function promoteUser(handle, callback) {
     try {
-        const response = await fetch('/api/users/promote', {
+        const response = await fetch('./api/users/promote', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle }),
@@ -160,7 +160,7 @@ async function promoteUser(handle, callback) {
  */
 async function demoteUser(handle, callback) {
     try {
-        const response = await fetch('/api/users/demote', {
+        const response = await fetch('./api/users/demote', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle }),
@@ -211,7 +211,7 @@ async function createUser(form, callback) {
     });
 
     try {
-        const response = await fetch('/api/users/create', {
+        const response = await fetch('./api/users/create', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify(body),
@@ -239,7 +239,7 @@ async function createUser(form, callback) {
 async function backupUserData(handle, callback) {
     try {
         toastr.info('Please wait for the download to start.', 'Backup Requested');
-        const response = await fetch('/api/users/backup', {
+        const response = await fetch('./api/users/backup', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle }),
@@ -298,7 +298,7 @@ async function changePassword(handle, callback) {
             throw new Error('Passwords do not match');
         }
 
-        const response = await fetch('/api/users/change-password', {
+        const response = await fetch('./api/users/change-password', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle, newPassword, oldPassword }),
@@ -353,7 +353,7 @@ async function deleteUser(handle, callback) {
             throw new Error('Handles do not match');
         }
 
-        const response = await fetch('/api/users/delete', {
+        const response = await fetch('./api/users/delete', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle, purge }),
@@ -390,7 +390,7 @@ async function resetSettings(handle, callback) {
             throw new Error('Reset settings cancelled');
         }
 
-        const response = await fetch('/api/users/reset-settings', {
+        const response = await fetch('./api/users/reset-settings', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle, password }),
@@ -426,7 +426,7 @@ async function changeName(handle, name, callback) {
 
         name = String(result);
 
-        const response = await fetch('/api/users/change-name', {
+        const response = await fetch('./api/users/change-name', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ handle, name }),
@@ -464,7 +464,7 @@ async function restoreSnapshot(name, callback) {
             throw new Error('Restore snapshot cancelled');
         }
 
-        const response = await fetch('/api/settings/restore-snapshot', {
+        const response = await fetch('./api/settings/restore-snapshot', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ name }),
@@ -490,7 +490,7 @@ async function restoreSnapshot(name, callback) {
  */
 async function loadSnapshotContent(name) {
     try {
-        const response = await fetch('/api/settings/load-snapshot', {
+        const response = await fetch('./api/settings/load-snapshot', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ name }),
@@ -518,7 +518,7 @@ async function loadSnapshotContent(name) {
  */
 async function getSnapshots() {
     try {
-        const response = await fetch('/api/settings/get-snapshots', {
+        const response = await fetch('./api/settings/get-snapshots', {
             method: 'POST',
             headers: getRequestHeaders(),
         });
@@ -544,7 +544,7 @@ async function getSnapshots() {
  */
 async function makeSnapshot(callback) {
     try {
-        const response = await fetch('/api/settings/make-snapshot', {
+        const response = await fetch('./api/settings/make-snapshot', {
             method: 'POST',
             headers: getRequestHeaders(),
         });
@@ -603,7 +603,7 @@ async function viewSettingsSnapshots() {
  */
 async function resetEverything(callback) {
     try {
-        const step1Response = await fetch('/api/users/reset-step1', {
+        const step1Response = await fetch('./api/users/reset-step1', {
             method: 'POST',
             headers: getRequestHeaders(),
         });
@@ -635,7 +635,7 @@ async function resetEverything(callback) {
             throw new Error('Reset everything cancelled');
         }
 
-        const step2Response = await fetch('/api/users/reset-step2', {
+        const step2Response = await fetch('./api/users/reset-step2', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ password, code }),
@@ -745,7 +745,7 @@ async function cropAndUploadAvatar(handle, file) {
  */
 async function changeAvatar(handle, avatar) {
     try {
-        const response = await fetch('/api/users/change-avatar', {
+        const response = await fetch('./api/users/change-avatar', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ avatar, handle }),
@@ -843,7 +843,7 @@ async function openAdminPanel() {
  * @returns {Promise<void>}
  */
 async function logout() {
-    await fetch('/api/users/logout', {
+    await fetch('./api/users/logout', {
         method: 'POST',
         headers: getRequestHeaders(),
     });
@@ -858,7 +858,7 @@ async function logout() {
  */
 async function slugify(text) {
     try {
-        const response = await fetch('/api/users/slugify', {
+        const response = await fetch('./api/users/slugify', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({ text }),

@@ -202,7 +202,7 @@ export class QuickReply {
     }
 
     async showEditor() {
-        const response = await fetch('/scripts/extensions/quick-reply/html/qrEditor.html', { cache: 'no-store' });
+        const response = await fetch('./scripts/extensions/quick-reply/html/qrEditor.html', { cache: 'no-store' });
         if (response.ok) {
             this.template = document.createRange().createContextualFragment(await response.text()).querySelector('#qr--modalEditor');
             /**@type {HTMLElement} */

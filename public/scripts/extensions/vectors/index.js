@@ -178,7 +178,7 @@ async function summarizeExtra(hashedMessages) {
     for (const element of hashedMessages) {
         try {
             const url = new URL(getApiUrl());
-            url.pathname = '/api/summarize';
+            url.pathname = './api/summarize';
 
             const apiResult = await doExtrasFetch(url, {
                 method: 'POST',
@@ -875,7 +875,7 @@ async function queryCollection(collectionId, searchText, topK) {
 async function queryMultipleCollections(collectionIds, searchText, topK, threshold) {
     const headers = getVectorHeaders();
 
-    const response = await fetch('/api/vector/query-multi', {
+    const response = await fetch('./api/vector/query-multi', {
         method: 'POST',
         headers: headers,
         body: JSON.stringify({
@@ -907,7 +907,7 @@ async function purgeFileVectorIndex(fileUrl) {
         console.log(`Vectors: Purging file vector index for ${fileUrl}`);
         const collectionId = getFileCollectionId(fileUrl);
 
-        const response = await fetch('/api/vector/purge', {
+        const response = await fetch('./api/vector/purge', {
             method: 'POST',
             headers: getRequestHeaders(),
             body: JSON.stringify({
